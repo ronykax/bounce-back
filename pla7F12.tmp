@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://tjnuswmbutk1"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_aakln"]
+[ext_resource type="Texture2D" uid="uid://ymu4aiuksu5n" path="res://assets/player.png" id="1_kvrw8"]
+[ext_resource type="Resource" uid="uid://dhm3dqb6vfs1i" path="res://res/player_info_res.tres" id="2_syjn1"]
+[ext_resource type="Texture2D" uid="uid://coy8hal1wavor" path="res://assets/rpg.png" id="3_d8nja"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hjkn2"]
+size = Vector2(64, 106)
+
+[sub_resource type="Curve" id="Curve_nyeq8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_lq2ts"]
+offsets = PackedFloat32Array(0, 0.711475, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0)
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 6
+script = ExtResource("1_aakln")
+player_info_res = ExtResource("2_syjn1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kvrw8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hjkn2")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_hjkn2")
+
+[node name="PivotPoint" type="Node2D" parent="."]
+
+[node name="WeaponHolder" type="Node2D" parent="PivotPoint"]
+position = Vector2(55, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="PivotPoint/WeaponHolder"]
+texture = ExtResource("3_d8nja")
+
+[node name="ProjectileSpawnPoint" type="Node2D" parent="PivotPoint/WeaponHolder"]
+position = Vector2(55, 0)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="PivotPoint/WeaponHolder/ProjectileSpawnPoint"]
+emitting = false
+amount = 12
+lifetime = 0.65
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+spread = 90.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+scale_amount_min = 30.0
+scale_amount_max = 36.0
+scale_amount_curve = SubResource("Curve_nyeq8")
+color_ramp = SubResource("Gradient_lq2ts")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

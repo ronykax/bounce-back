@@ -1,0 +1,168 @@
+[gd_scene load_steps=12 format=3 uid="uid://camx34vu2racw"]
+
+[ext_resource type="FontFile" uid="uid://cemogtf0vcvnl" path="res://assets/PressStart2P-Regular.ttf" id="1_kh5nx"]
+[ext_resource type="Script" path="res://in_game_ui.gd" id="1_wno2b"]
+[ext_resource type="Script" path="res://score.gd" id="2_65vic"]
+[ext_resource type="Texture2D" uid="uid://bckkfgk3580nb" path="res://assets/heart.png" id="2_edbb5"]
+[ext_resource type="Script" path="res://hearts_ui.gd" id="2_lmpqv"]
+[ext_resource type="Resource" uid="uid://do20vewxsn32q" path="res://resources/health.tres" id="4_11j3d"]
+[ext_resource type="Texture2D" uid="uid://co2j5mwyu6wkq" path="res://assets/close.png" id="7_j7r5y"]
+[ext_resource type="FontFile" uid="uid://dow6exjnwbkhd" path="res://assets/PixelOperator.ttf" id="8_vduqr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3v2ds"]
+bg_color = Color(0.0941176, 0.0941176, 0.0941176, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pm4bc"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vlotc"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="GameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wno2b")
+
+[node name="Score" type="MarginContainer" parent="."]
+layout_mode = 1
+offset_right = 96.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("2_65vic")
+
+[node name="Label" type="Label" parent="Score"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kh5nx")
+theme_override_font_sizes/font_size = 24
+text = "00028"
+
+[node name="Hearts" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -208.0
+offset_bottom = 88.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+script = ExtResource("2_lmpqv")
+heart_texture = ExtResource("2_edbb5")
+health_res = ExtResource("4_11j3d")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Hearts"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 2
+
+[node name="InformationWindow" type="Control" parent="."]
+visible = false
+custom_minimum_size = Vector2(600, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="InformationWindow"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3v2ds")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InformationWindow/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Panel" type="Panel" parent="InformationWindow/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pm4bc")
+
+[node name="TextureButton" type="TextureButton" parent="InformationWindow/Panel/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -21.0
+offset_bottom = 21.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("7_j7r5y")
+
+[node name="MarginContainer" type="MarginContainer" parent="InformationWindow/Panel/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+
+[node name="Label" type="Label" parent="InformationWindow/Panel/VBoxContainer/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_vduqr")
+theme_override_font_sizes/font_size = 36
+text = "how to play"
+
+[node name="Panel2" type="Panel" parent="InformationWindow/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_vlotc")
+
+[node name="MarginContainer" type="MarginContainer" parent="InformationWindow/Panel/VBoxContainer/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="RichTextLabel" type="RichTextLabel" parent="InformationWindow/Panel/VBoxContainer/Panel2/MarginContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("8_vduqr")
+theme_override_font_sizes/normal_font_size = 42
+text = "Destroy the bad triangles with RPG grenades.
+
+But, watch out—every bounce can turn your own weapon against you.
+
+In this game, you are your own enemy!"
+
+[connection signal="pressed" from="InformationWindow/Panel/VBoxContainer/Panel/TextureButton" to="." method="_on_texture_button_pressed"]

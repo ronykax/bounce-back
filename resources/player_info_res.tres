@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PlayerInfo" load_steps=2 format=3 uid="uid://dhm3dqb6vfs1i"]
+
+[ext_resource type="Script" path="res://resources/player_info.gd" id="1_yqiqn"]
+
+[resource]
+script = ExtResource("1_yqiqn")
+player_position = Vector2(12, 3)

@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://djhyf4a1acs6y"]
+
+[ext_resource type="Script" path="res://main_control.gd" id="1_blpud"]
+[ext_resource type="PackedScene" uid="uid://ck121p5qk7gh4" path="res://main.tscn" id="1_tvpk4"]
+[ext_resource type="Resource" uid="uid://do20vewxsn32q" path="res://resources/health.tres" id="2_cq54q"]
+[ext_resource type="PackedScene" uid="uid://do3qnx7fupyvi" path="res://world.tscn" id="2_wl66b"]
+[ext_resource type="PackedScene" uid="uid://camx34vu2racw" path="res://in_game_ui.tscn" id="3_ert1b"]
+[ext_resource type="AudioStream" uid="uid://caucr2uogdwq3" path="res://sounds/retro-game-music-short-245228.mp3" id="6_vd6i3"]
+
+[node name="MainControl" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_blpud")
+health_res = ExtResource("2_cq54q")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0941176, 0.0941176, 0.0941176, 1)
+
+[node name="World" parent="." instance=ExtResource("2_wl66b")]
+
+[node name="Main" parent="." instance=ExtResource("1_tvpk4")]
+
+[node name="UI" parent="." instance=ExtResource("3_ert1b")]
+layout_mode = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_vd6i3")
+volume_db = -2.0
+autoplay = true
+parameters/looping = true

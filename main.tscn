@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://ck121p5qk7gh4"]
+
+[ext_resource type="PackedScene" uid="uid://tjnuswmbutk1" path="res://player.tscn" id="1_jg6cv"]
+[ext_resource type="Texture2D" uid="uid://cqiqy7orky1mq" path="res://assets/ground.png" id="2_2p8n7"]
+[ext_resource type="Script" path="res://spawner.gd" id="2_kv5a5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xb0nh"]
+size = Vector2(1024, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ngf2j"]
+size = Vector2(1024, 256)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qg6wk"]
+b = Vector2(0, 605)
+
+[node name="Main" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_jg6cv")]
+position = Vector2(513, 376)
+
+[node name="SpawnArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("2_kv5a5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea"]
+position = Vector2(512, 50)
+shape = SubResource("RectangleShape2D_xb0nh")
+
+[node name="Timer" type="Timer" parent="SpawnArea"]
+wait_time = 3.0
+autostart = true
+
+[node name="Enemies" type="Node2D" parent="SpawnArea"]
+
+[node name="Ground" type="StaticBody2D" parent="."]
+collision_layer = 5
+collision_mask = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground"]
+modulate = Color(0.385493, 0.385492, 0.385492, 1)
+position = Vector2(512, 768)
+texture = ExtResource("2_2p8n7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(512, 768)
+shape = SubResource("RectangleShape2D_ngf2j")
+
+[node name="Boundaries" type="Node2D" parent="."]
+
+[node name="Left" type="StaticBody2D" parent="Boundaries"]
+collision_layer = 5
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Left"]
+shape = SubResource("SegmentShape2D_qg6wk")
+
+[node name="Right" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(1024, 0)
+collision_layer = 5
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Right"]
+shape = SubResource("SegmentShape2D_qg6wk")
+
+[connection signal="timeout" from="SpawnArea/Timer" to="SpawnArea" method="_on_timer_timeout"]

@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://do3qnx7fupyvi"]
+
+[ext_resource type="Shader" path="res://crt.gdshader" id="1_5kc3f"]
+[ext_resource type="Texture2D" uid="uid://cgxfoeievc2c7" path="res://assets/cursor.png" id="1_epwea"]
+[ext_resource type="Script" path="res://cursor.gd" id="2_hyu6k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t2s5d"]
+shader = ExtResource("1_5kc3f")
+shader_parameter/resolution = Vector2(400, 300)
+shader_parameter/scan_line_amount = 1.0
+shader_parameter/warp_amount = 0.65
+shader_parameter/noise_amount = 0.03
+shader_parameter/interference_amount = 1.0
+shader_parameter/grille_amount = 0.1
+shader_parameter/grille_size = 2.0
+shader_parameter/vignette_amount = 0.7
+shader_parameter/vignette_intensity = 0.5
+shader_parameter/aberation_amount = 1.0
+shader_parameter/roll_line_amount = 0.025
+shader_parameter/roll_speed = 1.0
+shader_parameter/scan_line_strength = -8.0
+shader_parameter/pixel_strength = -2.0
+
+[sub_resource type="Environment" id="Environment_aqbhc"]
+background_mode = 3
+glow_enabled = true
+glow_normalized = true
+glow_bloom = 0.25
+glow_blend_mode = 0
+
+[node name="World" type="CanvasLayer"]
+
+[node name="Cursor" type="Sprite2D" parent="."]
+texture = ExtResource("1_epwea")
+script = ExtResource("2_hyu6k")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_t2s5d")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_aqbhc")

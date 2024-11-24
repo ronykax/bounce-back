@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://tjnuswmbutk1"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_aakln"]
+[ext_resource type="Texture2D" uid="uid://ymu4aiuksu5n" path="res://assets/player.png" id="1_kvrw8"]
+[ext_resource type="Texture2D" uid="uid://coy8hal1wavor" path="res://assets/rpg.png" id="3_d8nja"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hjkn2"]
+size = Vector2(64, 106)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_aakln")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kvrw8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hjkn2")
+
+[node name="WeaponHolder" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="WeaponHolder"]
+texture = ExtResource("3_d8nja")

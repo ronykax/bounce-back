@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://cpuffu4jtlsow"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_g67md"]
+[ext_resource type="Texture2D" uid="uid://egyoar4cmdhx" path="res://assets/enemy.png" id="1_lmual"]
+[ext_resource type="Resource" uid="uid://dhm3dqb6vfs1i" path="res://resources/player_info_res.tres" id="2_npbcc"]
+[ext_resource type="Resource" uid="uid://do20vewxsn32q" path="res://resources/health.tres" id="3_aan60"]
+[ext_resource type="AudioStream" uid="uid://bqgg7u368fw5o" path="res://sounds/hitHurt.wav" id="5_3hjex"]
+[ext_resource type="AudioStream" uid="uid://curg2i1nyfb5a" path="res://sounds/death.wav" id="6_a6wg5"]
+
+[sub_resource type="Curve" id="Curve_sv003"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_k4kox"]
+offsets = PackedFloat32Array(0, 0.711475, 1)
+colors = PackedColorArray(0.933333, 0.203922, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0)
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+editor_description = "enemy"
+collision_layer = 2
+collision_mask = 15
+script = ExtResource("1_g67md")
+player_info_res = ExtResource("2_npbcc")
+health_res = ExtResource("3_aan60")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.933333, 0.203922, 1, 1)
+texture = ExtResource("1_lmual")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(2, 10)
+polygon = PackedVector2Array(-2, -42, -34, 22, 30, 22)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 15
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(2, 10)
+polygon = PackedVector2Array(-2, -43, -35, 23, 31, 23)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 12
+lifetime = 0.65
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+scale_amount_min = 30.0
+scale_amount_max = 50.0
+scale_amount_curve = SubResource("Curve_sv003")
+color_ramp = SubResource("Gradient_k4kox")
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("5_3hjex")
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("6_a6wg5")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

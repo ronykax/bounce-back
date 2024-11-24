@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdcrxjr22cba7"]
+
+[ext_resource type="Script" path="res://time_scale_modifier.gd" id="1_whf00"]
+
+[node name="TimeScaleModifier" type="Node"]
+script = ExtResource("1_whf00")

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Health" load_steps=2 format=3 uid="uid://do20vewxsn32q"]
+
+[ext_resource type="Script" path="res://resources/health.gd" id="1_5vn2w"]
+
+[resource]
+script = ExtResource("1_5vn2w")
+hearts = 3
