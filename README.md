@@ -1,7 +1,7 @@
 # Bounce Back
 You have an RPG that shoots bouncy projectiles that bounce off walls and enemies so you may sometimes hit yourself (avoidable).
 
-# Theme
+## Theme
 You are your own enemy.
 
 ## Installation
