@@ -1,5 +1,5 @@
 # Bounce Back
-You have an RPG that shoots bouncy projectiles that bounce off walls and enemies so you may sometimes hit yourself (avoidable).
+You shoot bouncy projectiles that can hit walls, enemies, or even you. Move left or right to dodge them and stay safe.
 
 ## Theme
 You are your own enemy.
