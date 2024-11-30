@@ -5,6 +5,8 @@ extends Area2D
 @onready var spawn_timer: Timer = $Timer
 
 var grid_size = 10
+#var max_enemies = 1
+var max_enemies = 4
 
 const enemy_scene = preload("res://enemy.tscn")
 
@@ -27,5 +29,5 @@ func spawn_enemy() -> void:
 	enemies.add_child(new_enemy)
 
 func _on_timer_timeout() -> void:
-	if enemies.get_child_count() < 4:
+	if enemies.get_child_count() < max_enemies:
 		spawn_enemy()

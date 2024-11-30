@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="GetHurt" load_steps=2 format=3 uid="uid://30gc34k7yun8"]
+
+[ext_resource type="Script" path="res://get_hurt.gd" id="1_ki717"]
+
+[resource]
+script = ExtResource("1_ki717")
+is_hurt_rn = false

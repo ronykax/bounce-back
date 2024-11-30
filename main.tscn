@@ -1,11 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://ck121p5qk7gh4"]
+[gd_scene load_steps=9 format=3 uid="uid://ck121p5qk7gh4"]
 
 [ext_resource type="PackedScene" uid="uid://tjnuswmbutk1" path="res://player.tscn" id="1_jg6cv"]
 [ext_resource type="Texture2D" uid="uid://cqiqy7orky1mq" path="res://assets/ground.png" id="2_2p8n7"]
 [ext_resource type="Script" path="res://spawner.gd" id="2_kv5a5"]
+[ext_resource type="Shader" path="res://2d_shader.gdshader" id="3_47cbe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xb0nh"]
 size = Vector2(1024, 100)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ery1d"]
+shader = ExtResource("3_47cbe")
+shader_parameter/debug = false
+shader_parameter/border_scale = 2.0
+shader_parameter/shadow_offset = Vector2(0, 6)
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/blur_amount = 5.0
+shader_parameter/shadow_scale = 1.5
+shader_parameter/disable_rotating = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ngf2j"]
 size = Vector2(1024, 256)
@@ -28,7 +39,7 @@ position = Vector2(512, 50)
 shape = SubResource("RectangleShape2D_xb0nh")
 
 [node name="Timer" type="Timer" parent="SpawnArea"]
-wait_time = 3.0
+wait_time = 2.25
 autostart = true
 
 [node name="Enemies" type="Node2D" parent="SpawnArea"]
@@ -38,7 +49,8 @@ collision_layer = 5
 collision_mask = 7
 
 [node name="Sprite2D" type="Sprite2D" parent="Ground"]
-modulate = Color(0.385493, 0.385492, 0.385492, 1)
+modulate = Color(0.417188, 0.417188, 0.417188, 1)
+material = SubResource("ShaderMaterial_ery1d")
 position = Vector2(512, 768)
 texture = ExtResource("2_2p8n7")
 

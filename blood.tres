@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Blood" load_steps=2 format=3 uid="uid://dpk24wtproclp"]
+
+[ext_resource type="Script" path="res://blood.gd" id="1_h203h"]
+
+[resource]
+script = ExtResource("1_h203h")
+show_blood = false

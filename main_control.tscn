@@ -31,6 +31,7 @@ color = Color(0.0941176, 0.0941176, 0.0941176, 1)
 [node name="Main" parent="." instance=ExtResource("1_tvpk4")]
 
 [node name="UI" parent="." instance=ExtResource("3_ert1b")]
+top_level = true
 layout_mode = 1
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

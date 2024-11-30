@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://tjnuswmbutk1"]
+[gd_scene load_steps=16 format=3 uid="uid://tjnuswmbutk1"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_aakln"]
 [ext_resource type="Texture2D" uid="uid://ymu4aiuksu5n" path="res://assets/player.png" id="1_kvrw8"]
 [ext_resource type="Resource" uid="uid://do20vewxsn32q" path="res://resources/health.tres" id="2_h22v5"]
 [ext_resource type="Resource" uid="uid://dhm3dqb6vfs1i" path="res://resources/player_info_res.tres" id="2_syjn1"]
 [ext_resource type="Texture2D" uid="uid://coy8hal1wavor" path="res://assets/rpg.png" id="3_d8nja"]
+[ext_resource type="Resource" uid="uid://30gc34k7yun8" path="res://get_hurt.tres" id="4_rtf2n"]
+[ext_resource type="Resource" uid="uid://dpk24wtproclp" path="res://blood.tres" id="5_vfmxt"]
 [ext_resource type="AudioStream" uid="uid://ccc3uwmsf6nxs" path="res://sounds/laserShoot.wav" id="6_afi8f"]
 [ext_resource type="AudioStream" uid="uid://bqgg7u368fw5o" path="res://sounds/hitHurt.wav" id="7_g3g54"]
 
@@ -19,23 +21,64 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0.711475, 1)
 colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0)
 
+[sub_resource type="Animation" id="Animation_jagd6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_awohv"]
+resource_name = "player_hurt"
+length = 0.534
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333, 0.4, 0.466667, 0.533333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.298039, 0.345098, 1, 1), Color(0.845121, 0.880657, 0.999999, 1), Color(0.298039, 0.345098, 1, 1), Color(0.847059, 0.882353, 1, 1), Color(0.298039, 0.345098, 1, 1), Color(0.847059, 0.882353, 1, 1), Color(0.298039, 0.345098, 1, 1), Color(0.847059, 0.882353, 1, 1), Color(0.298039, 0.345098, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ucbrb"]
+_data = {
+"RESET": SubResource("Animation_jagd6"),
+"player_hurt": SubResource("Animation_awohv")
+}
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 12
 script = ExtResource("1_aakln")
 health_res = ExtResource("2_h22v5")
 player_info_res = ExtResource("2_syjn1")
+get_hurt_res = ExtResource("4_rtf2n")
+blood_res = ExtResource("5_vfmxt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_kvrw8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_hjkn2")
+debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_hjkn2")
+debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="PivotPoint" type="Node2D" parent="."]
 
@@ -71,5 +114,10 @@ stream = ExtResource("6_afi8f")
 
 [node name="Hurt" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("7_g3g54")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ucbrb")
+}
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,13 +1,19 @@
-[gd_scene load_steps=12 format=3 uid="uid://camx34vu2racw"]
+[gd_scene load_steps=18 format=3 uid="uid://camx34vu2racw"]
 
 [ext_resource type="FontFile" uid="uid://cemogtf0vcvnl" path="res://assets/PressStart2P-Regular.ttf" id="1_kh5nx"]
 [ext_resource type="Script" path="res://in_game_ui.gd" id="1_wno2b"]
 [ext_resource type="Script" path="res://score.gd" id="2_65vic"]
 [ext_resource type="Texture2D" uid="uid://bckkfgk3580nb" path="res://assets/heart.png" id="2_edbb5"]
+[ext_resource type="Resource" uid="uid://dpk24wtproclp" path="res://blood.tres" id="2_i5g0e"]
 [ext_resource type="Script" path="res://hearts_ui.gd" id="2_lmpqv"]
 [ext_resource type="Resource" uid="uid://do20vewxsn32q" path="res://resources/health.tres" id="4_11j3d"]
 [ext_resource type="Texture2D" uid="uid://co2j5mwyu6wkq" path="res://assets/close.png" id="7_j7r5y"]
 [ext_resource type="FontFile" uid="uid://dow6exjnwbkhd" path="res://assets/PixelOperator.ttf" id="8_vduqr"]
+[ext_resource type="Texture2D" uid="uid://d0knbswoxbbo6" path="res://assets/TopLeft.png" id="9_js3ii"]
+[ext_resource type="Texture2D" uid="uid://ege44ggvk1qb" path="res://assets/TopRight.png" id="10_oohad"]
+[ext_resource type="Texture2D" uid="uid://0f45ety1klwc" path="res://assets/BottomLeft.png" id="11_3lcvg"]
+[ext_resource type="Texture2D" uid="uid://33sdmyh3wue2" path="res://assets/BottomRight.png" id="12_mfjb1"]
+[ext_resource type="Texture2D" uid="uid://dt3repn4ud8yp" path="res://assets/hurt_blood.png" id="13_1a82h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3v2ds"]
 bg_color = Color(0.0941176, 0.0941176, 0.0941176, 1)
@@ -31,6 +37,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wno2b")
+blood_res = ExtResource("2_i5g0e")
 
 [node name="Score" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -69,8 +76,8 @@ theme_override_constants/separation = 16
 alignment = 2
 
 [node name="InformationWindow" type="Control" parent="."]
-visible = false
-custom_minimum_size = Vector2(600, 500)
+top_level = true
+custom_minimum_size = Vector2(734, 500)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -85,6 +92,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="InformationWindow"]
+custom_minimum_size = Vector2(734, 500)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -136,7 +144,7 @@ theme_override_constants/margin_left = 12
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_vduqr")
 theme_override_font_sizes/font_size = 36
-text = "how to play"
+text = "README.md"
 
 [node name="Panel2" type="Panel" parent="InformationWindow/Panel/VBoxContainer"]
 layout_mode = 2
@@ -157,12 +165,76 @@ theme_override_constants/margin_bottom = 32
 
 [node name="RichTextLabel" type="RichTextLabel" parent="InformationWindow/Panel/VBoxContainer/Panel2/MarginContainer"]
 layout_mode = 2
+theme_override_constants/line_separation = -4
 theme_override_fonts/normal_font = ExtResource("8_vduqr")
-theme_override_font_sizes/normal_font_size = 42
-text = "Destroy the bad triangles with RPG grenades.
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "Destroy triangles by shooting bouncy orbs.
 
 But, watch out—every bounce can turn your own weapon against you.
 
-In this game, you are your own enemy!"
+In this game, you are your worst enemy.
+
+Use [A] and [D] to move left or right.
+Click left mouse button to shoot orbs.
+Press [M] to mute/unmute music."
+
+[node name="Blood" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.470588)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_1a82h")
+
+[node name="Borders" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopLeft" type="TextureRect" parent="Borders"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("9_js3ii")
+
+[node name="TopRight" type="TextureRect" parent="Borders"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -110.0
+offset_bottom = 110.0
+grow_horizontal = 0
+texture = ExtResource("10_oohad")
+
+[node name="BottomLeft" type="TextureRect" parent="Borders"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -110.0
+offset_right = 110.0
+grow_vertical = 0
+texture = ExtResource("11_3lcvg")
+
+[node name="BottomRight" type="TextureRect" parent="Borders"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -110.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("12_mfjb1")
 
 [connection signal="pressed" from="InformationWindow/Panel/VBoxContainer/Panel/TextureButton" to="." method="_on_texture_button_pressed"]
