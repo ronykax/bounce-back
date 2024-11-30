@@ -4,7 +4,8 @@ Destroy triangles by shooting bouncy orbs, but watch out—those same orbs can b
 **!! [Play the game on itch.io](https://ronykax.itch.io/bounce-back) !!**
 
 ### Screenshots
-![screenshot](./screenshots/1.png)
-![screenshot](./screenshots/2.png)
-![screenshot](./screenshots/3.png)
-![screenshot](./screenshots/4.png)
+![thumbnail](./images/thumbnail.png)
+![screenshot](./images/1.png)
+![screenshot](./images/2.png)
+![screenshot](./images/3.png)
+![screenshot](./images/4.png)
